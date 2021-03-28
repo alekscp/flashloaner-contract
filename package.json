@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.1.0"
+    "dotenv": "^8.2.0",
+    "@truffle/hdwallet-provider": "1.2.5",
+    "@openzeppelin/contracts": "3.3.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -13,10 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/pedrobergamini/flashloaner-contract.git"
   },
-  "keywords": ["defi", "ethereum", "flashloans"],
-  "author": "Pedro Bergamini",
+  "keywords": [
+    "defi",
+    "ethereum",
+    "flashloans"
+  ],
+  "author": "Aleks Clapin-Pépin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pedrobergamini/flashloaner-contract/issues"
+    "url": ""
   }
 }

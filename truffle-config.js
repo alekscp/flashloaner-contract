@@ -44,12 +44,26 @@ module.exports = {
     //
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 9545,            // Standard Ethereum port (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
     mainnet: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.INFURA),
       network_id: 1
+    },
+    bsc_testnet: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.BSC_TESTNET_NETWORK),
+      network_id: 97,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+    bsc_mainnet: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.BSC_MAINNET_NETWORK),
+      network_id: 56,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
     }
     // Another network with more advanced options...
     // advanced: {

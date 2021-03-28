@@ -10,15 +10,15 @@ contract FlashLoaner {
   uint constant deadline = 10 days;
   IUniswapV2Router02 immutable sushiRouter;
 
-  constructor(address _factory, address _uniRouter, address _sushiRouter) public {
+  constructor(address _factory, address _pancakeRouter, address _julRouter) public {
     factory = _factory;  
-    sushiRouter = IUniswapV2Router02(_sushiRouter);
+    sushiRouter = IUniswapV2Router02(_julRouter);
   }
 
   function uniswapV2Call(address _sender, uint _amount0, uint _amount1, bytes calldata _data) external {
       address[] memory path = new address[](2);
       uint amountToken = _amount0 == 0 ? _amount1 : _amount0;
-      
+
       address token0 = IUniswapV2Pair(msg.sender).token0();
       address token1 = IUniswapV2Pair(msg.sender).token1();
 
@@ -29,15 +29,13 @@ contract FlashLoaner {
       path[1] = _amount0 == 0 ? token0 : token1;
 
       IERC20 token = IERC20(_amount0 == 0 ? token1 : token0);
-      
+
       token.approve(address(sushiRouter), amountToken);
 
-      // no need for require() check, if amount required is not sent sushiRouter will revert
+      // no need for require() check, if amount required is not sent julRouter will revert
       uint amountRequired = UniswapV2Library.getAmountsIn(factory, amountToken, path)[0];
       uint amountReceived = sushiRouter.swapExactTokensForTokens(amountToken, amountRequired, path, msg.sender, deadline)[1];
 
-      // YEAHH PROFIT
       token.transfer(_sender, amountReceived - amountRequired);
-    
   }
 }

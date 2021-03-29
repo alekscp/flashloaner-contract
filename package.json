@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "@truffle/hdwallet-provider": "1.2.5",
+    "@truffle/hdwallet-provider": "1.0.18",
     "@openzeppelin/contracts": "3.3.0"
   },
   "devDependencies": {},
